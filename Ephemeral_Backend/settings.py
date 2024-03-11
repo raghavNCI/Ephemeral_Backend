@@ -25,7 +25,7 @@ SECRET_KEY = '$3qd#s)!ma%*-ig_z%ko*5)j798@job4qy5d^3gq!j-2^9odt4'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['0302b931a82c4cffb897c9df4c6edee2.vfs.cloud9.eu-west-1.amazonaws.com']
+ALLOWED_HOSTS = ['127.0.0.1', '0302b931a82c4cffb897c9df4c6edee2.vfs.cloud9.eu-west-1.amazonaws.com']
 
 
 # Application definition
@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'corsheaders',
 ]
 
 MIDDLEWARE = [
@@ -47,6 +48,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
 ]
 
 ROOT_URLCONF = 'Ephemeral_Backend.urls'
@@ -81,7 +83,7 @@ DATABASES = {
 }
 
 CORS_ALLOWED_ORIGINS = [
-    "http://localhost:80800",  # Add your frontend origin
+    "http://localhost:5173",  # Add your frontend origin
     "http://127.0.0.1:8080",
     "https://0302b931a82c4cffb897c9df4c6edee2.vfs.cloud9.eu-west-1.amazonaws.com",
 ]

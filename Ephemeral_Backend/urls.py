@@ -15,9 +15,11 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from Ephemeral_Backend.views import data_view  # Import the data_view function
+from Ephemeral_Backend.views import data_view  
+from Ephemeral_Backend.views import login_view
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('data/', data_view, name='data'),  # Reference the view function without calling it
+    path('data/', data_view, name='data'), 
+    path('login/<str:ephemeral_id>/<str:password>/', login_view, name='login')
 ]
