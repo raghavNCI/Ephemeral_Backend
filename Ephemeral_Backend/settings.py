@@ -25,7 +25,7 @@ SECRET_KEY = '$3qd#s)!ma%*-ig_z%ko*5)j798@job4qy5d^3gq!j-2^9odt4'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['127.0.0.1', '0302b931a82c4cffb897c9df4c6edee2.vfs.cloud9.eu-west-1.amazonaws.com']
+ALLOWED_HOSTS = ['127.0.0.1', '0302b931a82c4cffb897c9df4c6edee2.vfs.cloud9.eu-west-1.amazonaws.com', 'ephemeralAPI.eba-gwwuspmd.us-east-1.elasticbeanstalk.com']
 
 
 # Application definition
@@ -38,6 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'corsheaders',
+    'Ephemeral_Backend',
 ]
 
 MIDDLEWARE = [

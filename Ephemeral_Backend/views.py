@@ -1,4 +1,8 @@
 from django.http import JsonResponse
+from .dynoDb import CreateUserTable
+import boto3
+
+dyno_client = boto3.resource('dynamodb')
 
 users = [
     {
@@ -27,6 +31,9 @@ users = [
     }
 ]
 
+def test_view(request):
+    return JsonResponse({'message': 'App working successfully'})
+
 def login_view(request, ephemeral_id, password):
     for user in users:
         if user["ephemeral_Id"] == ephemeral_id and user["password"] == password:
@@ -34,5 +41,8 @@ def login_view(request, ephemeral_id, password):
 
     return JsonResponse({'message': 'Login failed. Invalid credentials'})
 
-def data_view(request):
-    return JsonResponse(users, safe=False)
+def create_user_table(request):
+    table_instance = CreateUserTable(dyno_client)
+    created_table = table_instance.create_table()
+
+    return JsonResponse({'message': f'Table created successfully!'})

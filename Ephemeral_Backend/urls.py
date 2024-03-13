@@ -15,11 +15,14 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from Ephemeral_Backend.views import data_view  
 from Ephemeral_Backend.views import login_view
+from Ephemeral_Backend.views import create_user_table
+from Ephemeral_Backend.views import test_view
 
 urlpatterns = [
+    # path('', include('Ephemeral_Backend.urls')),
     path('admin/', admin.site.urls),
-    path('data/', data_view, name='data'), 
-    path('login/<str:ephemeral_id>/<str:password>/', login_view, name='login')
+    path('test/', test_view),
+    path('login/<str:ephemeral_id>/<str:password>/', login_view, name='login'),
+    path('createTable/', create_user_table, name='create_table')
 ]
