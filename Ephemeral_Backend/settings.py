@@ -23,9 +23,9 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = '$3qd#s)!ma%*-ig_z%ko*5)j798@job4qy5d^3gq!j-2^9odt4'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = ['127.0.0.1', '0302b931a82c4cffb897c9df4c6edee2.vfs.cloud9.eu-west-1.amazonaws.com', 'ephemeralAPI.eba-gwwuspmd.us-east-1.elasticbeanstalk.com']
+ALLOWED_HOSTS = ['3.255.99.19', '0302b931a82c4cffb897c9df4c6edee2.vfs.cloud9.eu-west-1.amazonaws.com']
 
 
 # Application definition
@@ -42,13 +42,13 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
-    'django.middleware.security.SecurityMiddleware',
+    # 'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
-    'django.middleware.common.CommonMiddleware',
-    'django.middleware.csrf.CsrfViewMiddleware',
+    # 'django.middleware.common.CommonMiddleware',
+    # 'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
-    'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    # 'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'corsheaders.middleware.CorsMiddleware',
 ]
 
