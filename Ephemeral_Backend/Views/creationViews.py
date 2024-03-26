@@ -2,9 +2,12 @@ from django.http import JsonResponse
 from Ephemeral_Backend.Dyno.users import Users
 from Ephemeral_Backend.Dyno.peers import Peers
 from Ephemeral_Backend.S3.displayPic import DisplayPic
+from Ephemeral_Backend.Security.Client import client_token_required
+from Ephemeral_Backend.Security.Acess import access_token_required
 import traceback
 import json
 
+@client_token_required
 def create_user(request):
     if request.method == 'POST':
         raw_data = request.body
@@ -28,6 +31,7 @@ def create_user(request):
     else:
         return JsonResponse({'successful': False, 'response': {'error': 'Unsupported HTTP method', 'status': 405}})
 
+@access_token_required
 def add_peer(request, addTo, addId):
     peer_instance = Peers()
     try:
@@ -41,7 +45,8 @@ def add_peer(request, addTo, addId):
         response = {'successful': False, 'message': str(e)}
     
     return JsonResponse(response)
-    
+
+@access_token_required    
 def add_dp(request):
     try:
         if request.method == 'POST' and request.FILES.get('image'):

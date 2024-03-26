@@ -2,6 +2,7 @@ import boto3
 from boto3.dynamodb.conditions import Attr, Key
 from Ephemeral_Backend.S3.displayPic import DisplayPic
 import uuid
+import secrets
 
 dyn_resource = boto3.resource('dynamodb')
 
@@ -42,7 +43,7 @@ class Users:
                 pic_instance = DisplayPic()
                 pic_request = pic_instance.get_presigned_url(obj['eph_id'][1:])
                 if pic_request['successful']:
-                    response = { 'successful': True, 'message': {'id': obj['id'], 'eph_id': obj['eph_id'], 'first_name': obj['first_name'], 'last_name': obj['last_name'], 'email': obj['email'], 'display_pic': pic_request["message"]}}
+                    response = { 'successful': True, 'message': {'access_token': obj['access_token'], 'id': obj['id'], 'eph_id': obj['eph_id'], 'first_name': obj['first_name'], 'last_name': obj['last_name'], 'email': obj['email'], 'display_pic': pic_request["message"]}}
            else:
                 response = { 'successful': False, 'message': 'Authentication Failed' }
             
@@ -61,6 +62,7 @@ class Users:
         item_count = scan['Count'] + 1
         hex_value = hex(item_count)[2:]
         eph_id = '#EP'+hex_value.zfill(3)
+        access_token = secrets.token_hex(20)
         
         item = {
             'id': id_value,
@@ -68,7 +70,8 @@ class Users:
             'first_name': first_name,
             'last_name': last_name,
             'email': email,
-            'password': password
+            'password': password,
+            'access_token': access_token
         }
         
         response = table.put_item(Item=item)

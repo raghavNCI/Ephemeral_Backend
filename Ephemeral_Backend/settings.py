@@ -83,6 +83,8 @@ DATABASES = {
     }
 }
 
+CORS_ALLOW_HEADERS = ['client-token', 'authorization', 'content-type']
+
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:5173",  # Add your frontend origin
     "http://127.0.0.1:8080",
