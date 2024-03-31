@@ -1,7 +1,7 @@
 from django.http import JsonResponse
 import boto3
 
-dynamodb = boto3.resource('dynamodb')
+dynamodb = boto3.resource('dynamodb', 'eu-west-1')
 table_name = 'x23211946_EphUsers'
 table = dynamodb.Table(table_name)
 

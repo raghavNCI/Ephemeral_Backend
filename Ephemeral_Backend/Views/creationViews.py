@@ -3,33 +3,36 @@ from Ephemeral_Backend.Dyno.users import Users
 from Ephemeral_Backend.Dyno.peers import Peers
 from Ephemeral_Backend.S3.displayPic import DisplayPic
 from Ephemeral_Backend.Security.Client import client_token_required
-from Ephemeral_Backend.Security.Acess import access_token_required
+from Ephemeral_Backend.Security.Access import access_token_required
 import traceback
 import json
 
 @client_token_required
 def create_user(request):
-    if request.method == 'POST':
-        raw_data = request.body
-        try:
-            body_data = json.loads(raw_data)
-        except json.JSONDecodeError:
-            return JsonResponse({'error': 'Invalid JSON in request body'}, status=400)
-        first_name = body_data.get('first_name')
-        last_name = body_data.get('last_name')
-        email = body_data.get('email')
-        password = body_data.get('password')
-        
-        user_instance = Users()
-        response = user_instance.create_user(first_name, last_name, email, password)
-        
-        if response['response']['ResponseMetadata']['HTTPStatusCode'] == 200:
-          return JsonResponse({'successful': True, 'response': response})
-        else:
-          return JsonResponse({'successful': False, 'response': response})
+    try:
+        if request.method == 'POST':
+            raw_data = request.body
+            try:
+                body_data = json.loads(raw_data)
+            except json.JSONDecodeError:
+                return JsonResponse({'error': 'Invalid JSON in request body'}, status=400)
+            first_name = body_data.get('first_name')
+            last_name = body_data.get('last_name')
+            email = body_data.get('email')
+            password = body_data.get('password')
+            
+            user_instance = Users()
+            response = user_instance.create_user(first_name, last_name, email, password)
+            
+            if response['response']['ResponseMetadata']['HTTPStatusCode'] == 200:
+                return JsonResponse({'successful': True, 'response': response})
+            else:
+                return JsonResponse({'successful': False, 'response': response})
 
-    else:
-        return JsonResponse({'successful': False, 'response': {'error': 'Unsupported HTTP method', 'status': 405}})
+        else:
+            return JsonResponse({'successful': False, 'response': {'error': 'Unsupported HTTP method', 'status': 405}})
+    except Exception as e:
+        return JsonResponse({'successful': False, 'response': str(e)})
 
 @access_token_required
 def add_peer(request, addTo, addId):
@@ -46,7 +49,7 @@ def add_peer(request, addTo, addId):
     
     return JsonResponse(response)
 
-@access_token_required    
+# @access_token_required    
 def add_dp(request):
     try:
         if request.method == 'POST' and request.FILES.get('image'):

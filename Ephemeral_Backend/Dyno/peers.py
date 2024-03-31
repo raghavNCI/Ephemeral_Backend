@@ -2,7 +2,7 @@ import boto3
 from boto3.dynamodb.conditions import Attr, Key
 from Ephemeral_Backend.Dyno.users import Users
 
-dyn_resource = boto3.resource('dynamodb')
+dyn_resource = boto3.resource('dynamodb', 'eu-west-1')
 
 class Peers:
     
@@ -28,7 +28,6 @@ class Peers:
     def get_peers(self, eph_id):
         table_name = 'x23211946_EphPeers'
         table = self.dyn_resource.Table(table_name)
-        table2 = self.dyn_resource.Table('x23211946_EphUsers')
         
         try:
             response = table.get_item(Key={'eph_id': eph_id})

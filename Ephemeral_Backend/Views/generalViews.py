@@ -3,7 +3,7 @@ from Ephemeral_Backend.Dyno.users import Users
 from Ephemeral_Backend.Dyno.peers import Peers
 from Ephemeral_Backend.S3.displayPic import DisplayPic
 from Ephemeral_Backend.Security.Client import client_token_required
-from Ephemeral_Backend.Security.Acess import access_token_required
+from Ephemeral_Backend.Security.Access import access_token_required
 
 def test_view(request):
     return JsonResponse({'message': 'App working successfully'})
@@ -34,6 +34,7 @@ def get_user(request, eph_id):
     response = inst.get_user(eph_id)
     return JsonResponse(response)
 
+@access_token_required
 def get_peers(request, eph_id):
     inst = Peers()
     response = inst.get_peers(eph_id)

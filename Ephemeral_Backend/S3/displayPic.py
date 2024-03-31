@@ -4,7 +4,7 @@ from botocore.exceptions import ClientError
 class DisplayPic:
     
     def __init__(self):
-        self.s3_client = boto3.client('s3')
+        self.s3_client = boto3.client('s3', 'eu-west-1')
         
     def createDPBucket(self):
         try:

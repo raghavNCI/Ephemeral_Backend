@@ -4,7 +4,7 @@ from Ephemeral_Backend.S3.displayPic import DisplayPic
 import uuid
 import secrets
 
-dyn_resource = boto3.resource('dynamodb')
+dyn_resource = boto3.resource('dynamodb', 'eu-west-1')
 
 class Users:
 
@@ -48,14 +48,13 @@ class Users:
                 response = { 'successful': False, 'message': 'Authentication Failed' }
             
         except Exception as e:
-            response = { 'successful': False, 'message': e}
+            response = { 'successful': False, 'message': str(e)}
         
         return response
     
     def create_user(self, first_name, last_name, email, password):
         table_name = 'x23211946_EphUsers'
         table = self.dyn_resource.Table(table_name)
-        
         id_value = str(uuid.uuid4())
         
         scan = table.scan(Select='COUNT')
@@ -76,7 +75,7 @@ class Users:
         
         response = table.put_item(Item=item)
         
-        response2 = {"id": id_value, "eph_id": eph_id, "response": response}
+        response2 = {"id": id_value, "eph_id": eph_id, "access_token": access_token, "response": response}
 
         return response2
         
