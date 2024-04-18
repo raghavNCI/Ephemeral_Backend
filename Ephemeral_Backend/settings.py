@@ -25,7 +25,7 @@ SECRET_KEY = '$3qd#s)!ma%*-ig_z%ko*5)j798@job4qy5d^3gq!j-2^9odt4'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['127.0.0.1', 'http://ephemeral-fe-env.eba-cprt3zjx.us-east-1.elasticbeanstalk.com']
+ALLOWED_HOSTS = ['54.247.41.109', 'http://ephemeral-fe-env.eba-cprt3zjx.us-east-1.elasticbeanstalk.com']
 
 
 # Application definition

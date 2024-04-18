@@ -64,20 +64,15 @@ class Peers:
             item = response.get('Item')
     
             if item is None:
-                # If the item doesn't exist, create it with an empty peers list
                 item_data = {'eph_id': addTo, 'peers': []}
                 table.put_item(Item=item_data)
                 item = item_data  # Update item with the newly created item
     
             peers = item.get('peers', [])
     
-            # Convert addId to DynamoDB String type before checking existence
             addId_dynamodb = addId
             if addId_dynamodb not in peers:
-                # Append addId to peers list
                 peers.append(addId_dynamodb)
-    
-                # Update the item with the modified peers list
                 table.update_item(
                     Key={'eph_id': addTo},
                     UpdateExpression='SET peers = :val',
@@ -89,6 +84,35 @@ class Peers:
     
         except Exception as e:
             return {'successful': False, 'message': str(e)}
+        
+    def delete_peer(self, removeFrom, removeId):
+        table_name = 'x23211946_EphPeers'
+        table = self.dyn_resource.Table(table_name)
+    
+        try:
+            response = table.get_item(Key={'eph_id': removeFrom})
+            item = response.get('Item')
+    
+            if item is None:
+                return {'successful': False, 'message': 'No such peer found to remove'}
+    
+            peers = item.get('peers', [])
+    
+            if removeId in peers:
+                peers.remove(removeId)
+                
+                table.update_item(
+                    Key={'eph_id': removeFrom},
+                    UpdateExpression='SET peers = :val',
+                    ExpressionAttributeValues={':val': peers}
+                )
+                return {'successful': True, 'message': 'Peer removed successfully'}
+            else:
+                return {'successful': False, 'message': 'Peer not found in the list'}
+    
+        except Exception as e:
+            return {'successful': False, 'message': str(e)}
+
 
 
 

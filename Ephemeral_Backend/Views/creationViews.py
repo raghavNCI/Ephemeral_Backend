@@ -48,6 +48,21 @@ def add_peer(request, addTo, addId):
         response = {'successful': False, 'message': str(e)}
     
     return JsonResponse(response)
+    
+@access_token_required
+def delete_peer(request, removeFrom, removeId):
+    peer_instance = Peers()
+    try:
+        response = peer_instance.delete_peer(removeFrom, removeId)
+        if response['successful']:
+            temp = removeId
+            removeId = removeFrom
+            removeFrom = temp
+            response = peer_instance.delete_peer(removeFrom, removeId)
+    except Exception as e:
+        response = {'successful': False, 'message': str(e)}
+    
+    return JsonResponse(response)
 
 # @access_token_required    
 def add_dp(request):

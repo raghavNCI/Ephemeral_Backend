@@ -16,7 +16,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from Ephemeral_Backend.Views.generalViews import login_view, create_user_table, test_view, get_user, create_peer_table, get_peers, create_displayPic_Bucket
-from Ephemeral_Backend.Views.creationViews import create_user, add_peer, add_dp, test_body
+from Ephemeral_Backend.Views.creationViews import create_user, add_peer, delete_peer, add_dp, test_body
 
 urlpatterns = [
     path('', test_view),
@@ -29,6 +29,7 @@ urlpatterns = [
     path('searchUser/<str:eph_id>/', get_user),
     path('getPeers/<str:eph_id>/', get_peers),
     path('addPeer/<str:addTo>/<str:addId>/', add_peer),
+    path('deletePeer/<str:removeFrom>/<str:removeId>/', delete_peer),
     path('createDPBucket/', create_displayPic_Bucket),
     path('addDp/', add_dp)
 ]
