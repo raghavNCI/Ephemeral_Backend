@@ -25,7 +25,7 @@ SECRET_KEY = '$3qd#s)!ma%*-ig_z%ko*5)j798@job4qy5d^3gq!j-2^9odt4'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['127.0.0.1', '0302b931a82c4cffb897c9df4c6edee2.vfs.cloud9.eu-west-1.amazonaws.com']
+ALLOWED_HOSTS = ['127.0.0.1', 'http://ephemeral-fe-env.eba-cprt3zjx.us-east-1.elasticbeanstalk.com']
 
 
 # Application definition
@@ -76,12 +76,6 @@ WSGI_APPLICATION = 'Ephemeral_Backend.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/2.1/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-    }
-}
 
 CORS_ALLOW_HEADERS = ['client-token', 'authorization', 'content-type', 'access-token', 'id']
 
@@ -89,6 +83,7 @@ CORS_ALLOWED_ORIGINS = [
     "http://localhost:5173",  # Add your frontend origin
     "http://127.0.0.1:8080",
     "https://0302b931a82c4cffb897c9df4c6edee2.vfs.cloud9.eu-west-1.amazonaws.com",
+    "http://ephemeral-fe-env.eba-cprt3zjx.us-east-1.elasticbeanstalk.com"
 ]
 
 

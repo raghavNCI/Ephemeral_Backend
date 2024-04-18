@@ -19,6 +19,7 @@ from Ephemeral_Backend.Views.generalViews import login_view, create_user_table, 
 from Ephemeral_Backend.Views.creationViews import create_user, add_peer, add_dp, test_body
 
 urlpatterns = [
+    path('', test_view),
     path('test/', test_view),
     path('testBody/', test_body),
     path('login/<str:ephemeral_id>/<str:password>/', login_view, name='login'),
