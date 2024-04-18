@@ -13,12 +13,12 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
-from django.contrib import admin
 from django.urls import path
-from Ephemeral_Backend.Views.generalViews import login_view, create_user_table, test_view, get_user, create_peer_table, get_peers, create_displayPic_Bucket
-from Ephemeral_Backend.Views.creationViews import create_user, add_peer, add_dp, test_body
+from Views.generalViews import login_view, create_user_table, test_view, get_user, create_peer_table, get_peers, create_displayPic_Bucket
+from Views.creationViews import create_user, add_peer, delete_peer, add_dp, test_body
 
 urlpatterns = [
+    path('', test_view),
     path('test/', test_view),
     path('testBody/', test_body),
     path('login/<str:ephemeral_id>/<str:password>/', login_view, name='login'),
@@ -28,6 +28,7 @@ urlpatterns = [
     path('searchUser/<str:eph_id>/', get_user),
     path('getPeers/<str:eph_id>/', get_peers),
     path('addPeer/<str:addTo>/<str:addId>/', add_peer),
+    path('deletePeer/<str:removeFrom>/<str:removeId>/', delete_peer),
     path('createDPBucket/', create_displayPic_Bucket),
     path('addDp/', add_dp)
 ]
