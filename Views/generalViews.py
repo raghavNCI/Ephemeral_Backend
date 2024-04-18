@@ -1,9 +1,9 @@
 from django.http import JsonResponse
-from Ephemeral_Backend.Dyno.users import Users
-from Ephemeral_Backend.Dyno.peers import Peers
-from Ephemeral_Backend.S3.displayPic import DisplayPic
-from Ephemeral_Backend.Security.Client import client_token_required
-from Ephemeral_Backend.Security.Access import access_token_required
+from Dyno.users import Users
+from Dyno.peers import Peers
+from S3.displayPic import DisplayPic
+from Security.Client import client_token_required
+from Security.Access import access_token_required
 
 def test_view(request):
     return JsonResponse({'message': 'App working successfully'})

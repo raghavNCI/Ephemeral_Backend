@@ -1,6 +1,6 @@
 import boto3
 from boto3.dynamodb.conditions import Attr, Key
-from Ephemeral_Backend.Dyno.users import Users
+from Dyno.users import Users
 
 dyn_resource = boto3.resource('dynamodb', 'eu-west-1')
 

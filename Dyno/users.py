@@ -1,6 +1,6 @@
 import boto3
 from boto3.dynamodb.conditions import Attr, Key
-from Ephemeral_Backend.S3.displayPic import DisplayPic
+from S3.displayPic import DisplayPic
 import uuid
 import secrets
 
