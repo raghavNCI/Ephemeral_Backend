@@ -16,11 +16,9 @@ def access_token_required(func):
         
         if not id_value or not access_token:
             return JsonResponse({'error': 'Missing id or Access-Token headers'}, status=400)
-        
-        filter_expression = Attr('id').eq(id_value)
-        
+            
         try:
-            response = table.scan(FilterExpression=filter_expression)
+            response = table.get_item(Attr={'id': id_value})
             item = response['Items'][0]
         except ClientError as e:
             print(e.response['Error']['Message'])
