@@ -34,7 +34,7 @@ def create_user(request):
     except Exception as e:
         return JsonResponse({'successful': False, 'response': str(e)})
 
-@access_token_required
+# @access_token_required
 def add_peer(request, addTo, addId):
     peer_instance = Peers()
     try:
@@ -49,7 +49,7 @@ def add_peer(request, addTo, addId):
     
     return JsonResponse(response)
     
-@access_token_required
+# @access_token_required
 def delete_peer(request, removeFrom, removeId):
     peer_instance = Peers()
     try:

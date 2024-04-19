@@ -112,7 +112,7 @@ class Users:
     def get_user(self, eph_id):
         table_name = 'x23211946_EphUsers'
         table = self.dyn_resource.Table(table_name)
-        
+    
         try:
             response = table.query(
                 IndexName='EphIdIndex',  

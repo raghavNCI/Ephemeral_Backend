@@ -28,13 +28,18 @@ def create_peer_table(request):
     
     return JsonResponse(response)
 
-@access_token_required
+# @access_token_required
 def get_user(request, eph_id):
-    inst = Users()
-    response = inst.get_user(eph_id)
-    return JsonResponse(response)
+    try:
+        inst = Users()
+        print('Working here')
+        response = inst.get_user(eph_id)
+        return JsonResponse(response)
+    except Exception as e:
+        response = {'successful': False, 'message': str(e)}
+        return JsonResponse(response)
 
-@access_token_required
+# @access_token_required
 def get_peers(request, eph_id):
     inst = Peers()
     response = inst.get_peers(eph_id)
