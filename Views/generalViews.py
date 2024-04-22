@@ -16,11 +16,11 @@ def login_view(request, ephemeral_id, password):
     
     return JsonResponse(response)
 
-def create_user_table(request):
-    user_instance = Users()
-    response = user_instance.create_table()
+# def create_user_table(request):
+#     user_instance = Users()
+#     response = user_instance.create_table()
 
-    return JsonResponse(response)
+#     return JsonResponse(response)
     
 def create_peer_table(request):
     peer_instance = Peers()
